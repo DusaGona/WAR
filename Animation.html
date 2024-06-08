@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Animation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+
+    body {
+      font-family: 'Amatic SC', cursive;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .text-container {
+      text-align: center;
+      font-size: 2em;
+      line-height: 1.5;
+    }
+
+    .word {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .letter {
+      display: inline-block;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="text-container">
+    <div class="word">Моя</div>
+    <div class="word">машина</div>
+    <div class="word">пуста</div>
+    <div class="word">ТЫ</div>
+    <div class="word">идешь</div>
+    <div class="word">к</div>
+    <div class="word">себе</div>
+    <div class="word">навстречу</div>
+    <div class="word">ТЫ</div>
+    <div class="word">и</div>
+    <div class="word">только</div>
+    <div class="word">ты</div>
+    <div class="word">Больше</div>
+    <div class="word">никого</div>
+    <div class="word">нет</div>
+    <div class="word">И</div>
+    <div class="word">не</div>
+    <div class="word">будет</div>
+    <br>
+    <div class="word">Такая</div>
+    <div class="word">вот</div>
+    <div class="word">правда</div>
+    <div class="word">Забудь</div>
+    <div class="word">все</div>
+    <div class="word">что</div>
+    <div class="word">было</div>
+    <div class="word">и</div>
+    <div class="word">будет</div>
+    <div class="word">Все</div>
+    <div class="word">есть</div>
+    <div class="word">сейчас</div>
+    <div class="word">и</div>
+    <div class="word">больше</div>
+    <div class="word">нет</div>
+    <div class="word">НИЧЕГО</div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const words = document.querySelectorAll('.word');
+      words.forEach(word => {
+        const letters = word.textContent.split('');
+        word.textContent = '';
+        letters.forEach(letter => {
+          const span = document.createElement('span');
+          span.textContent = letter;
+          span.classList.add('letter');
+          word.appendChild(span);
+        });
+      });
+
+      const letters = document.querySelectorAll('.letter');
+      letters.forEach(letter => {
+        const delay = Math.random() * 2;
+        const duration = 1 + Math.random() * 2;
+        gsap.fromTo(letter, {
+          opacity: 0,
+          y: 100 + Math.random() * 200,
+          x: -50 + Math.random() * 100,
+          rotation: -180 + Math.random() * 360
+        }, {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          rotation: 0,
+          duration: duration,
+          delay: delay,
+          ease: "power4.out"
+        });
+      });
+    });
+  </script>
+</body>
+</html>
